@@ -1,3 +1,34 @@
-<p>
-  job-details works!
-</p>
+<div class="row" style="padding-top: 20px;">
+    <div class="col-sm-12">
+        <div class="card border-info" *ngIf="jobDetails">
+            <div class="card-header bg-light text-success">{{ jobDetails.title }}
+                <a href="#" class="btn btn-info float-right" routerLink="/jobs">Retour</a>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                  <li class="list-group-item"><i><b>Entreprise :</b></i>{{ jobDetails.company }} à {{ jobDetails.city }} - {{ jobDetails.zipcode }}</li>
+                  <li class="list-group-item"><i><b>Description :</b></i> {{ jobDetails.description }}</li>
+                  <li class="list-group-item"><i><b>Type de contrat :</b></i> {{ jobDetails.contract }}</li>
+                  <li class="list-group-item"><i><b>Salaire :</b></i> {{ jobDetails.salary }} {{ jobDetails.currency | toMoneySymbol}}</li>
+                  <li class="list-group-item"><i><b>Expérience :</b></i>{{ jobDetails.experience }} | <i><b>Status :</b></i>{{ jobDetails.status }}</li>
+                  <li class="list-group-item"><i><b>Area :</b></i> {{ jobDetails.area }}</li>
+                  <li class="list-group-item"><i><b>Field :</b></i> {{ jobDetails.field }}</li>
+
+                  <li class="list-group-item bg-danger"></li>
+                  <li class="list-group-item bg-secondary"><i><b>Publié le :</b></i> {{ jobDetails.publishdate | toShortDate }}</li>
+                  <li class="list-group-item bg-secondary"><i><b>Actualisé le :</b></i> {{ jobDetails.lastupdate | toShortDate }}</li>
+                </ul>
+
+
+
+            </div>
+            <div class="card-footer bg-info"><b>démarrage au : </b>{{ jobDetails.startdate | toShortDate }}</div>
+            </div>
+          </div>
+          <div class="card text-white bg-danger mb-3" *ngIf="errorMessage">
+            <div class="card-header alert-danger">Erreur</div>
+            <div class="card-body">
+              <div class="card-text" style="padding-left: 20px;">{{errorMessage}}</div>
+            </div>
+          </div>
+  </div>
