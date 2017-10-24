@@ -1,0 +1,101 @@
+<form [formGroup]="form" (ngSubmit)="createJob(form.value)">
+  <div class="form-group row">
+    <label for="title" class="col-sm-2 col-form-label">Title</label>
+    <div class="col-sm-10">
+      <input type="text" name="title" class="form-control" placeholder="Title" formControlName="title">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="company" class="col-sm-2 col-form-label">Company</label>
+    <div class="col-sm-10">
+      <input type="text" name="company" class="form-control" placeholder="company" formControlName="company">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="city" class="col-sm-2 col-form-label">City</label>
+    <div class="col-sm-10">
+      <input type="text" name="city" class="form-control" placeholder="City" formControlName="city">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="zipcode" class="col-sm-2 col-form-label">Zip Code</label>
+    <div class="col-sm-10">
+      <input type="text" name="zipcode" class="form-control" placeholder="Zip Code" formControlName="zipcode">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="description" class="col-sm-2 col-form-label">Description</label>
+    <div class="col-sm-10">
+      <textarea type="text" name="description" class="form-control" formControlName="description" cols="30" rows="10">
+              </textarea>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="contract" class="col-sm-2 col-form-label">Contract</label>
+    <div class="col-sm-10">
+      <select name="contract" formControlName="contract" class="form-control">
+        <option *ngFor="let ct of contractTypes" [value]="ct.value">{{ ct.name }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="salary" class="col-sm-2 col-form-label">Salary</label>
+    <div class="col-sm-4">
+      <input type="text" name="salary" class="form-control small-text" placeholder="salary" formControlName="salary">
+    </div>
+
+    <label for="currency" class="col-sm-2 col-form-label">Currency</label>
+    <div class="col-sm-4">
+      <select name="currency" formControlName="currency" class="form-control currency">
+        <option *ngFor="let cr of currencies" [value]="cr.value">{{ cr.name }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="experience" class="col-sm-2 col-form-label">Experience</label>
+    <div class="col-sm-4">
+      <select name="experience" formControlName="experience" class="form-control experience">
+        <option *ngFor="let exp of experiencies" [value]="exp.value">{{ exp.name }}</option>
+      </select>
+    </div>
+    <label for="status" class="col-sm-2 col-form-label">Status</label>
+    <div class="col-sm-4">
+      <select name="status" formControlName="status" class="form-control status">
+        <option *ngFor="let s of statuses" [value]="s.value">{{ s.name }}</option>
+      </select>
+    </div>
+  </div>
+
+  <fieldset class="form-group">
+    <div class="row">
+      <legend class="col-form-legend col-sm-2">Areas</legend>
+    </div>
+    <div class="col-sm-10">
+      <div *ngFor="let area of areas" class="form-check">
+        <label [for]='"btn-" + area.value' class="form-check-label">
+          <input type="radio" [id]='"btn-" + area.value' name="area" [value]="area.value" formControlName="area" class="form-check-input"> {{ area.name }}
+        </label>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="form-group row">
+    <label for="startDate" class="col-sm-2 col-form-label">Start Date</label>
+    <div class="col-sm-10">
+      <input type="date" name="startDate" formControlName="startdate" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-6">
+      <button type="submit" class="btn btn-success">Soumettre</button>
+    </div>
+  </div>
+</form>
