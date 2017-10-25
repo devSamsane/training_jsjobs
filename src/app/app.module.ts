@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -16,6 +16,7 @@ import { JobDetailsComponent } from './job-details/job-details.component';
 import { AboutComponent } from './about/about.component';
 import { ToShortDatePipe } from './pipes/to-short-date.pipe';
 import { ToMoneySymbolPipe } from './pipes/to-money-symbol.pipe';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 const APP_ROUTES = [
   { path: '', component: HomeComponent },
@@ -36,12 +37,14 @@ const APP_ROUTES = [
     JobDetailsComponent,
     AboutComponent,
     ToShortDatePipe,
-    ToMoneySymbolPipe
+    ToMoneySymbolPipe,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     ReactiveFormsModule,
+    FormsModule,
     RouterModule.forRoot(APP_ROUTES)
   ],
   providers: [

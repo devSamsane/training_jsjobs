@@ -1,0 +1,13 @@
+<div class="row" *ngFor="let job of jobs" style="padding-top: 20px;">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header alert-success">{{ job.title }}
+            </div>
+            <div class="card-body">
+              <div class="card-title" style="padding-left: 20px;">{{ job.company }} | {{ job.city }} - {{ job.zipcode }}</div>
+              <div class="card-text" style="padding-left: 20px;">{{ job.description }}</div>
+              <div class="card-footer alert-warning">parue il y a {{ job.publishdate | daysAgo }}</div>
+            </div>
+          </div>
+    </div>
+  </div>
