@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import * as jwtDecode from 'jwt-decode';
 
 @Injectable()
@@ -14,7 +14,8 @@ export class AuthService {
   }
 
   isUserAuthenticated() {
-    return localStorage.getItem('authData');
+    // console.log("!!localStorage.getItem('authData')", !!localStorage.getItem('authData'));
+    return !!localStorage.getItem('authData'); // les 2 !! cast la valeur en boolean
   }
 
   logout() {
@@ -25,6 +26,15 @@ export class AuthService {
     console.log(data);
     return this.http.post(`${this.AUTH_URL}register`, data)
       .map(res => res.json());
+  }
+
+  addAuthorizationHeader(token) {
+    const authorizationHeader = new Headers({
+      'Authorization': 'Bearer ' + token
+    });
+    return new RequestOptions({
+      headers: authorizationHeader
+    });
   }
 
   decode(token) {

@@ -21,7 +21,7 @@ const getAllJobs = () => {
 app.use(bodyParser.json());
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Authorization');
   next();
 });
 
@@ -52,6 +52,7 @@ auth.post('/login', (req, res) => {
     });
 
     const token = jwt.sign({
+      exp: Math.floor(Date.now() / 1000) + (60), // 1 min
       iss: 'http://localhost:4201',
       role: user.role,
       email: req.body.email
@@ -88,7 +89,24 @@ api.get('/jobs/:id', (req, res) => {
   }
 })
 
-api.post('/jobs', (req, res) => {
+const checkUserToken = (req, res, next) => {
+  if (!req.header('Authorization')) {
+    return res.status(401).json({success: false, message: 'Header not found'});
+  }
+
+  const authorizationSplit = req.header('Authorization').split(' ');
+  let token = authorizationSplit[1];
+  let decodedToken = null;
+  try {
+    decodedToken = jwt.verify(token, secret);
+  } catch(error) {
+    return res.status(401).json({success: false, message: error});
+  }
+  console.log('decodedToken', decodedToken);
+  next();
+};
+
+api.post('/jobs',checkUserToken, (req, res) => {
   const job = req.body;
   addedJobs = [job, ...addedJobs];
   console.log('Nombre de jobs: ', getAllJobs().length);

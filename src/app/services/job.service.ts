@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/map';
 import { Subject } from 'rxjs/Rx';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class JobService {
@@ -12,16 +13,18 @@ export class JobService {
   API_URL: String = 'http://localhost:4201/api/';
   searchResultSubject = new Subject();
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private authService: AuthService) { }
 
   getJobs() {
     return this.http.get(this.API_URL + 'jobs')
       .map(res => res.json());
   }
 
-  addJob(job) {
+  addJob(job, token) {
     job.id = Date.now();
-    return this.http.post(this.API_URL + 'jobs', job)
+    const requestOptions = this.authService.addAuthorizationHeader(token);
+
+    return this.http.post(this.API_URL + 'jobs', job, requestOptions)
       .map(res => {
         console.log(res);
         this.jobsSubject.next(job);

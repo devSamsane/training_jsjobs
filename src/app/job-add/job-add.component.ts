@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { JobService } from '../services/job.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-job-add',
   templateUrl: './job-add.component.html',
   styleUrls: ['./job-add.component.css']
 })
-export class JobAddComponent implements OnInit {
+export class JobAddComponent implements OnInit, OnChanges {
   form: FormGroup;
+  userIsAuthenticated: Boolean = false;
+
   contractTypes: any[] = [
     {id: 1, name: 'stage', value: 'internship'},
     {id: 2, name: 'interim', value: 'temp'},
@@ -42,9 +45,19 @@ export class JobAddComponent implements OnInit {
     {id: 4, name: 'déplacements internationaux', value: 'international'}
   ];
 
-  constructor(private formBuilder: FormBuilder, private jobService: JobService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private jobService: JobService,
+    private authService: AuthService
+  ) { }
+
+  ngOnChanges() {
+
+  }
 
   ngOnInit() {
+    this.checkUserIsAuthenticated();
+
     this.form = this.formBuilder.group({
       id: -1,
       title: '',
@@ -65,10 +78,20 @@ export class JobAddComponent implements OnInit {
     });
   }
 
+
+
   createJob(formData) {
-    this.jobService.addJob(formData)
+    const token = JSON.parse(localStorage.getItem('authData')).token;
+    this.jobService.addJob(formData, token)
       .subscribe();
     this.form.reset();
+  }
+
+  checkUserIsAuthenticated() {
+    // console.log("this.authService.isUserAuthenticated", this.authService.isUserAuthenticated);
+    if (this.authService.isUserAuthenticated()) {
+      return this.userIsAuthenticated = true;
+    }
   }
 
 }
