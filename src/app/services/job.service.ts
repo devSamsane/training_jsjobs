@@ -20,6 +20,12 @@ export class JobService {
       .map(res => res.json());
   }
 
+  getJobsByUser(email) {
+    console.log(`${this.API_URL}jobs/${email}`);
+    return this.http.get(`${this.API_URL}jobs/${email}`)
+      .map(res => res.json());
+  }
+
   addJob(job, token) {
     job.id = Date.now();
     const requestOptions = this.authService.addAuthorizationHeader(token);

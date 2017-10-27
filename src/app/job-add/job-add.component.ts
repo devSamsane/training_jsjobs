@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { JobService } from '../services/job.service';
@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './job-add.component.html',
   styleUrls: ['./job-add.component.css']
 })
-export class JobAddComponent implements OnInit, OnChanges {
+export class JobAddComponent implements OnInit {
   form: FormGroup;
   userIsAuthenticated: Boolean = false;
 
@@ -50,10 +50,6 @@ export class JobAddComponent implements OnInit, OnChanges {
     private jobService: JobService,
     private authService: AuthService
   ) { }
-
-  ngOnChanges() {
-
-  }
 
   ngOnInit() {
     this.checkUserIsAuthenticated();

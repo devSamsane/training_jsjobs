@@ -1,6 +1,7 @@
 exports.jobs = [
   {
     "id": 1,
+    "email": "sm@test.com",
     "title": "Développeur JavaScript",
     "company": "AT Sure",
     "city": "Rennes",
@@ -19,6 +20,7 @@ exports.jobs = [
   },
   {
     "id": 2,
+    "email": "sm@test.com",
     "title": "Développeur Fullstack",
     "company": "c-noo-les-meilleurs",
     "city": "St Malo",
@@ -37,6 +39,7 @@ exports.jobs = [
   },
   {
     "id": 3,
+    "email": "sm2@test.com",
     "title": "Développeur Angular",
     "company": "SHT",
     "city": "Nantes",
@@ -55,6 +58,7 @@ exports.jobs = [
   },
   {
     "id": 4,
+    "email": "sm@test.com",
     "title": "Développeur Angular",
     "company": "Palindrome",
     "city": "Laval",

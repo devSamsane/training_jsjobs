@@ -12,7 +12,7 @@ let initialJobs = data.jobs;
 let addedJobs = [];
 
 // const fakeUser = {id: 1, email: 'sm@test.com',username: 'olivier' ,password: 'pass'};
-let users = [{ id: 1, email: 'sm@test.com',username: 'olivier' ,password: 'pass', role: 'admin' }, { id: 2, email: 'sm2@test.com',username: 'eothen' ,password: 'pass', role: 'user' }];
+let users = [{ id: 1, email: 'sm@test.com',username: 'olivier' ,password: 'pass', role: 'admin' }, { id: 2, email: 'sm2@test.com', username: 'eothen', password: 'pass', role: 'user' }];
 
 const getAllJobs = () => {
   return [...addedJobs, ...initialJobs];
@@ -40,6 +40,7 @@ auth.post('/login', (req, res) => {
     const index = users.findIndex(user => user.email === email);
 
     if (index < 0 || users[index].password != password) {
+      console.log('index', index);
       return res.status(401).json({ sucess: false, message: 'identifiants incorrects' });
     }
 
@@ -55,7 +56,8 @@ auth.post('/login', (req, res) => {
       exp: Math.floor(Date.now() / 1000) + (60), // 1 min
       iss: 'http://localhost:4201',
       role: user.role,
-      email: req.body.email
+      email: req.body.email,
+      username: user.username
     }, secret);
     return res.status(200).json({ success: true, token: token });
   }
@@ -78,6 +80,13 @@ auth.post('/register', (req, res) => {
 api.get('/jobs', (req, res) => {
   res.json(getAllJobs());
 });
+
+api.get('/jobs/:email', (req, res) => {
+  const email = req.params.email;
+  const jobs = getAllJobs().filter(job => job.email === email);
+  console.log('jobsFiltered', jobs);
+  res.status(200).json({success: true, jobs: jobs});
+})
 
 api.get('/jobs/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
