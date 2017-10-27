@@ -1,0 +1,15 @@
+<div *ngIf="decodedToken">
+  <pre>{{ decodedToken | json }}</pre>
+</div>
+
+<div *ngIf="isAdmin">
+  <div class="container" style="padding-top: 20px">
+    <div class="alert alert-success" role="alert">Je suis admin</div>
+  </div>
+</div>
+
+<div *ngIf="!isAdmin">
+    <div class="container" style="padding-top: 20px">
+      <div class="alert alert-info" role="alert">Je suis user</div>
+    </div>
+  </div>

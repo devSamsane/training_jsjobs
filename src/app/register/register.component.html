@@ -1,0 +1,31 @@
+<div class="container" style="padding-top: 20px;">
+    <div class="row justify-content-center">
+      <form #registerForm="ngForm" (ngSubmit)="register(registerForm.value)">
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <input type="text" name="email" class="form-control" placeholder="email" ngModel required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <input type="text" name="username" class="form-control" placeholder="username" ngModel required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <input type="password" name="password" class="form-control" placeholder="password" ngModel required>
+          </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-12">
+              <input type="password" name="confirmPassword" class="form-control" placeholder="confirm password" ngModel required>
+            </div>
+          </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <button type="submit" class="btn btn-success float-right" [disabled]="registerForm.invalid">Soumettre</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

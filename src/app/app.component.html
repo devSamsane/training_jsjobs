@@ -12,6 +12,16 @@
       <a href="#" routerLink="/jobs/add" class="nav-item nav-link">Create Offer</a>
     </li>
     <li class="nav-item">
+      <a *ngIf="!authService.isUserAuthenticated()" href="#" routerLink="/login" class="nav-item nav-link">Login</a>
+      <a *ngIf="authService.isUserAuthenticated()" href="#" class="nav-item nav-link" (click)="authService.logout()">Logout</a>
+    </li>
+    <li>
+      <a *ngIf="!authService.isUserAuthenticated()" href="#" routerLink="/register" class="nav-item nav-link">Register</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="authService.isUserAuthenticated()" href="#" routerLink="/profile" class="nav-item nav-link">Profile</a>
+    </li>
+    <li class="nav-item">
       <a href="#" routerLink="/about" class="nav-item nav-link">About</a>
     </li>
   </ul>

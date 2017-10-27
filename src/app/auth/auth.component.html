@@ -1,0 +1,25 @@
+<div class="container" style="padding-top: 20px;" *ngIf="!isAuthenticated">
+  <div class="row justify-content-center">
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <input type="text" name="email" class="form-control" placeholder="login" ngModel required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <input type="password" name="password" class="form-control" placeholder="password" ngModel required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <button type="submit" class="btn btn-success float-right" [disabled]="loginForm.invalid">Soumettre</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="container" style="padding-top: 20px" *ngIf="isAuthenticated">
+  <div class="alert alert-success" role="alert">{{ welcomeMessage }}</div>
+  <pre>{{ storage| json }}</pre>
+</div>
